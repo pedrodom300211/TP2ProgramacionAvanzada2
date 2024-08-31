@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">TP_2</string>
+    <string name="txt_view_tooolbar1">EjercicioControlers-Grupo 5</string>
+    <string name="three_dots_button">ic_three_dots</string>
+    <string name="AgregarContactoTitulo">FORMULARIO DE CONTACTO</string>
+    <string name="AgregarContactoSubtitulo">Este es un formulario destinado al registro de personas, sus datos personales e intereses.</string>
+    <string name="Nombre">NOMBRE</string>
+    <string name="Apellido">APELLIDO</string>
+    <string name="Telefono">TELEFONO</string>
+    <string name="Email">EMAIL</string>
+    <string name="Direccion">DIRECCION</string>
+    <string name="FechaNacimiento">FECHA DE NACIMIENTO</string>
+
+
+
+
+
+
+
+
+    <string-array name="listado_items">
+        <item></item>
+        <item>Agregar Contactos</item>
+        <item>Listado de contactos</item>
+    </string-array>
+    <string-array name="listado_items_Telefono_Email">
+
+        <item>Casa</item>
+        <item>Trabajo</item>
+        <item>Móvil</item>
+    </string-array>
 </resources>
