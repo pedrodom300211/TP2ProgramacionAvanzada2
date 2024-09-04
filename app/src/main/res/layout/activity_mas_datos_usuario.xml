@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MasDatosUsuario">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+    <TextView
+        android:id="@+id/txt_view_toolbar1"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_x="23dp"
+        android:layout_y="25dp"
+        android:text="@string/txt_view_tooolbar1" />
+
+    <TextView
+        android:id="@+id/txtMasDatosUsuario"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_x="14dp"
+        android:layout_y="115dp"
+        android:text="@string/MasDatosUsuarioTexto" />
+
+    <TextView
+        android:id="@+id/txtTituloMasDatosContacto"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_x="22dp"
+        android:layout_y="77dp"
+        android:text="@string/AgregarContactoTitulo" />
+
+    <RadioGroup
+        android:layout_width="293dp"
+        android:layout_height="wrap_content"
+        android:layout_x="9dp"
+        android:layout_y="190dp">
+
+        <RadioButton
+            android:id="@+id/RBPrimarioIncompleto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/PrimarioIncompleto" />
+
+        <RadioButton
+            android:id="@+id/RB_PrimarioCompleto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/PrimarioCompleto" />
+
+        <RadioButton
+            android:id="@+id/RB_SecundarioIncompleto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/SecundarioIncompleto" />
+
+        <RadioButton
+            android:id="@+id/RB_SecundarioCompleto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/SecundarioCompleto" />
+
+        <RadioButton
+            android:id="@+id/RB_Otros"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Otros" />
+
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/txtNivelEstudiosAlcanzados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_x="13dp"
+        android:layout_y="166dp"
+        android:text="@string/NivelEstudiosAlcanzados" />
+
+    <TextView
+        android:id="@+id/txtIntereses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="23dp"
+        android:layout_y="440dp"
+        android:text="@string/Intereses" />
+
+    <CheckBox
+        android:id="@+id/Deporte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="17dp"
+        android:layout_y="468dp"
+        android:text="@string/Deporte" />
+
+    <CheckBox
+        android:id="@+id/Musica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="143dp"
+        android:layout_y="472dp"
+        android:text="@string/Musica" />
+
+    <CheckBox
+        android:id="@+id/Arte"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="17dp"
+        android:layout_y="521dp"
+        android:text="@string/Arte" />
+
+    <CheckBox
+        android:id="@+id/Tecnologia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="142dp"
+        android:layout_y="521dp"
+        android:text="@string/Tecnologia" />
+
+    <TextView
+        android:id="@+id/txtDeseaREcibirInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="20dp"
+        android:layout_y="574dp"
+        android:text="@string/DeseaRecibirInformacion" />
+
+    <Switch
+        android:id="@+id/switchDeseaRecibirInfo"
+        android:layout_width="61dp"
+        android:layout_height="wrap_content"
+        android:layout_x="234dp"
+        android:layout_y="571dp"
+        android:showText="true"
+        android:textOff="@string/No"
+        android:textOn="@string/Si" />
+
+    <Button
+        android:id="@+id/BtnGuardarContacto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="180dp"
+        android:layout_y="630dp"
+        android:text="@string/Guardar" />
+
+</AbsoluteLayout>

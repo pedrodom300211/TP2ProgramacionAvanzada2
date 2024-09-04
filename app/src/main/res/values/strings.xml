@@ -4,17 +4,29 @@
     <string name="three_dots_button">ic_three_dots</string>
     <string name="AgregarContactoTitulo">FORMULARIO DE CONTACTO</string>
     <string name="AgregarContactoSubtitulo">Este es un formulario destinado al registro de personas, sus datos personales e intereses.</string>
+    <string name="MasDatosUsuarioTexto">A continuación, por favor se pide completar más datos personales</string>
+    <string name="DeseaRecibirInformacion">DESEA RECIBIR INFORMACION?</string>
+    <string name="Si">Si</string>
+    <string name="No">No</string>
+    <string name="Guardar">GUARDAR</string>
     <string name="Nombre">NOMBRE</string>
     <string name="Apellido">APELLIDO</string>
     <string name="Telefono">TELEFONO</string>
     <string name="Email">EMAIL</string>
     <string name="Direccion">DIRECCION</string>
     <string name="FechaNacimiento">FECHA DE NACIMIENTO</string>
-
-
-
-
-
+    <string name="Continuar">Continuar</string>
+    <string name="NivelEstudiosAlcanzados">NIVEL DE ESTUDIOS ALCANZADOS</string>
+    <string name="PrimarioCompleto">Primario Completo</string>
+    <string name="PrimarioIncompleto">Primario Incompleto</string>
+    <string name="SecundarioIncompleto">Secundario Incompleto</string>
+    <string name="SecundarioCompleto">Secundario Completo</string>
+    <string name="Otros">Otros</string>
+    <string name="Intereses">Intereses</string>
+    <string name="Deporte">Deporte</string>
+    <string name="Musica">Musica</string>
+    <string name="Arte">Arte</string>
+    <string name="Tecnologia">Tecnologia</string>
 
 
 
