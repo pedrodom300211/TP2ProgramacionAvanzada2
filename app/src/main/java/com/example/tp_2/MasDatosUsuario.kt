@@ -16,5 +16,12 @@ class MasDatosUsuario : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val nombre = intent.getStringExtra("nombre")
+        val apellido = intent.getStringExtra("apellido")
+        val telefono = intent.getStringExtra("telefono")
+        val email = intent.getStringExtra("email")
+        val direccion = intent.getStringExtra("direccion")
+        val fechaNacimiento = intent.getStringExtra("fechaNacimiento")
+
     }
 }
