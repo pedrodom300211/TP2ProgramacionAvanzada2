@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" >
+        android:theme="?attr/actionBarTheme">
 
         <TextView
             android:id="@+id/txt_view_toolbar1"
@@ -22,20 +22,22 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/txt_view_tooolbar1" />
-
-        <Spinner
-            android:id="@+id/spinner_main_activity_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible" />
-
         <ImageButton
             android:id="@+id/btn_three_dots"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
             android:background="?attr/selectableItemBackground"
             android:contentDescription="@string/three_dots_button"
             android:src="@drawable/ic_three_dots" />
+        <Spinner
+            android:id="@+id/spinner_main_activity_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:visibility="invisible" />
+
+
     </com.google.android.material.appbar.MaterialToolbar>
 
     <TextView

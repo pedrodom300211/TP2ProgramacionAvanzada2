@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
 
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, posicion: Int, ID: Long) {
-              val selectedItem: String =items[posicion]
+                val selectedItem: String =items[posicion]
                 Toast.makeText(this@MainActivity, "$selectedItem", Toast.LENGTH_SHORT).show()
                 when (selectedItem) {
                     "Agregar Contactos" -> {
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                         val intent = Intent(this@MainActivity, VerContactos::class.java)
                         startActivity(intent)
                     }
-            }
+                }
 
 
 

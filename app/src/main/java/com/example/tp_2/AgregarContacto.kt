@@ -34,6 +34,40 @@ class AgregarContacto : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val spinnerToolBar:Spinner=findViewById(R.id.spinner_main_activity_1)
+        val itemsSpinnerToolBar = resources.getStringArray(R.array.listado_items)
+        val adapterSpinnerToolBar = ArrayAdapter(this,android.R.layout.simple_spinner_item,itemsSpinnerToolBar)
+        adapterSpinnerToolBar.setDropDownViewResource(android.R.layout.simple_spinner_item)
+        spinnerToolBar.adapter=adapterSpinnerToolBar
+        val btnThreeDots: ImageButton = findViewById(R.id.btn_three_dots)
+        btnThreeDots.setOnClickListener {
+            spinnerToolBar.performClick()
+        }
+        spinnerToolBar.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+
+
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, posicion: Int, ID: Long) {
+                val selectedItem: String =itemsSpinnerToolBar[posicion]
+                Toast.makeText(this@AgregarContacto, "$selectedItem", Toast.LENGTH_SHORT).show()
+                when (selectedItem) {
+                    "Agregar Contactos" -> {
+                        val intent = Intent(this@AgregarContacto, AgregarContacto::class.java)
+                        startActivity(intent)
+                    }
+                    "Listado de contactos" -> {
+                        val intent = Intent(this@AgregarContacto, VerContactos::class.java)
+                        startActivity(intent)
+                    }
+                }
+
+
+
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+        }
 
         nombre = findViewById(R.id.editTextNombre)
         apellido = findViewById(R.id.editTextApellido)
