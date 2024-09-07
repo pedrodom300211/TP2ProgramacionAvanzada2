@@ -45,7 +45,7 @@ class AgregarContacto : AppCompatActivity() {
         //Evento click boton siguiente
         val btnSiguiente :Button=findViewById(R.id.buttonContinuar)
         btnSiguiente.setOnClickListener{
-            if(validar()) {
+            //if(validar()) {
                 val intent = Intent(this, MasDatosUsuario::class.java)
                 //envio datos a otro activity
                 intent.putExtra("nombre", nombre.text.toString())
@@ -57,7 +57,7 @@ class AgregarContacto : AppCompatActivity() {
 
                 startActivity(intent)
 
-            }
+            //}
         }
 
         val spinner: Spinner =findViewById(R.id.spinnerTelefono)

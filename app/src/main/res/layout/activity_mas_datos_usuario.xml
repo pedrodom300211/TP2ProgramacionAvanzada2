@@ -45,6 +45,7 @@
         android:text="@string/AgregarContactoTitulo" />
 
     <RadioGroup
+        android:id="@+id/RadioGroupNivelEstudios"
         android:layout_width="293dp"
         android:layout_height="wrap_content"
         android:layout_x="9dp"
