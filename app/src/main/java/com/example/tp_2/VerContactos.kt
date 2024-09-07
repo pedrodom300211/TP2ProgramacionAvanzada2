@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.ListView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -92,9 +93,17 @@ class VerContactos : AppCompatActivity() {
             Nivel estudios: $radioButtonSeleccionadoId
         """.trimIndent()
 
+        val arrayAdapter:ArrayAdapter<*>
+
+        val lv1 = findViewById<ListView>(R.id.lv1)
+        val datosEmail = mutableListOf("$nombre $apellido - $email")
+
+        arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, datosEmail)
+        lv1.adapter = arrayAdapter
+
         // Mostrar los datos en el TextView
-        val textViewDatos = findViewById<TextView>(R.id.textViewIntereses)
-        textViewDatos.text = datosTexto
+       // val textViewDatos = findViewById<TextView>(R.id.textViewIntereses)
+       // textViewDatos.text = datosTexto
     }
 
 
