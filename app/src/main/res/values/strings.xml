@@ -27,6 +27,7 @@
     <string name="Musica">Musica</string>
     <string name="Arte">Arte</string>
     <string name="Tecnologia">Tecnologia</string>
+    <string name="Contactos">Contactos</string>
 
 
     <string-array name="listado_items">

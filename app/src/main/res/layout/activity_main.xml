@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -8,15 +8,17 @@
     android:orientation="horizontal"
     tools:context=".MainActivity">
 
+
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/materialToolbar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:background="?attr/colorPrimary"
+        android:background="@color/Verde"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"  />
-
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
     <ImageButton
         android:id="@+id/btn_three_dots"
@@ -26,16 +28,26 @@
         android:layout_y="23dp"
         android:background="?attr/selectableItemBackground"
         android:contentDescription="@string/three_dots_button"
-        android:src="@drawable/ic_three_dots" />
+        android:src="@drawable/ic_three_dots"
+        app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+        app:layout_constraintEnd_toEndOf="@+id/materialToolbar2"
+        app:layout_constraintTop_toTopOf="@+id/materialToolbar2" />
 
     <TextView
         android:id="@+id/txt_view_toolbar1"
         android:layout_width="213dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_weight="1"
         android:layout_x="23dp"
         android:layout_y="25dp"
-        android:text="@string/txt_view_tooolbar1" />
+        android:text="@string/txt_view_tooolbar1"
+        app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_main_activity_1"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+        app:layout_constraintTop_toTopOf="@+id/materialToolbar2"
+        app:layout_constraintVertical_bias="0.444" />
 
     <Spinner
         android:id="@+id/spinner_main_activity_1"
@@ -43,6 +55,9 @@
         android:layout_height="wrap_content"
         android:layout_x="261dp"
         android:layout_y="22dp"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+        app:layout_constraintEnd_toStartOf="@+id/btn_three_dots"
+        app:layout_constraintTop_toTopOf="@+id/materialToolbar2" />
 
-</AbsoluteLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

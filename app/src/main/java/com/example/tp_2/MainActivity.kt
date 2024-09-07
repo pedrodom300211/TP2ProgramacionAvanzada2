@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         }
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
 
+
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, posicion: Int, ID: Long) {
               val selectedItem: String =items[posicion]
                 Toast.makeText(this@MainActivity, "$selectedItem", Toast.LENGTH_SHORT).show()

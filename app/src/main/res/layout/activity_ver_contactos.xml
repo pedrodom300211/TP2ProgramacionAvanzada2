@@ -8,6 +8,58 @@
     tools:context=".VerContactos">
 
 
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btn_three_dots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="382dp"
+        android:layout_y="23dp"
+        android:background="?attr/selectableItemBackground"
+        android:contentDescription="@string/three_dots_button"
+        android:src="@drawable/ic_three_dots"
+        app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+        app:layout_constraintEnd_toEndOf="@+id/materialToolbar2"
+        app:layout_constraintTop_toTopOf="@+id/materialToolbar2" />
+
+    <TextView
+        android:id="@+id/txt_view_toolbar1"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_x="23dp"
+        android:layout_y="25dp"
+        android:text="@string/Contactos"
+        app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_main_activity_1"
+        app:layout_constraintHorizontal_bias="0.217"
+        app:layout_constraintStart_toStartOf="@+id/materialToolbar2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.444" />
+
+    <Spinner
+        android:id="@+id/spinner_main_activity_1"
+        android:layout_width="74dp"
+        android:layout_height="24dp"
+        android:layout_x="261dp"
+        android:layout_y="22dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/materialToolbar2"
+        app:layout_constraintEnd_toStartOf="@+id/btn_three_dots"
+        app:layout_constraintTop_toTopOf="@+id/materialToolbar2" />
+
     <TextView
         android:id="@+id/textViewIntereses"
         android:layout_width="wrap_content"
