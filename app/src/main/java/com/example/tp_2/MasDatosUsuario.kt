@@ -15,6 +15,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+
 
 
 class MasDatosUsuario : AppCompatActivity() {
@@ -93,20 +96,20 @@ class MasDatosUsuario : AppCompatActivity() {
 
     }
     private fun guardarContacto(){
-        val sharedPreferences = getSharedPreferences("Contactos", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
+        //val sharedPreferences = getSharedPreferences("Contactos", Context.MODE_PRIVATE)
+       // val editor = sharedPreferences.edit()
         val chkBoxDeporte = findViewById<CheckBox>(R.id.Deporte)
         val chkBoxMusica = findViewById<CheckBox>(R.id.Musica)
         val chkBoxArte = findViewById<CheckBox>(R.id.Arte)
         val chkBoxTecnologia = findViewById<CheckBox>(R.id.Tecnologia)
         listaIntereses=""
 
-        editor.putString("NOMBRE", nombre)
+        /*editor.putString("NOMBRE", nombre)
         editor.putString("APELLIDO", apellido)
         editor.putString("TELEFONO", telefono)
         editor.putString("EMAIL", email)
         editor.putString("DIRECCION", direccion)
-        editor.putString("FECHA_NACIMIENTO", fechaNacimiento)
+        editor.putString("FECHA_NACIMIENTO", fechaNacimiento)*/
 
         if (chkBoxDeporte.isChecked) {
             listaIntereses+= chkBoxDeporte.text.toString()+" "
@@ -123,19 +126,65 @@ class MasDatosUsuario : AppCompatActivity() {
 
 
         val switch = findViewById<Switch>(R.id.switchDeseaRecibirInfo)
-        editor.putBoolean("DESEA_RECIBIR_INFO", switch.isChecked)
+       /* editor.putBoolean("DESEA_RECIBIR_INFO", switch.isChecked)*/
 
 
 
 
-        editor.putString("INTERESES", listaIntereses)
+       /* editor.putString("INTERESES", listaIntereses)*/
 
 
 
-        editor.putString("RADIO_BUTTON_SELECCIONADO", nivelEstudios)
-        Log.d("GuardarContacto", "Intereses guardados: $listaIntereses")
-        Log.d("GuardarContacto", "RadioButton seleccionado: $nivelEstudios")
+        /*editor.putString("RADIO_BUTTON_SELECCIONADO", nivelEstudios)*/
+
+
+
+
+
+       /// editor.apply()
+        val nuevoContacto= Contacto(nombre,apellido,email,telefono,fechaNacimiento,direccion,nivelEstudios,listaIntereses,nivelEstudios)
+        agregarContacto(this,nuevoContacto)
+
+    }
+    fun guardarContactos(context: Context, contactos: List<Contacto>) {
+        val sharedPreferences = context.getSharedPreferences("Contactos", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val gson = Gson()
+        val json = gson.toJson(contactos)
+        editor.putString("contactos_key", json)
         editor.apply()
+    }
 
+
+    fun obtenerContactos(context: Context): List<Contacto> {
+        val sharedPreferences = context.getSharedPreferences("Contactos", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val json = sharedPreferences.getString("contactos_key", null)
+        val type = object : TypeToken<List<Contacto>>() {}.type
+        return gson.fromJson(json, type) ?: emptyList()
+    }
+
+
+
+    fun agregarContacto(context: Context, nuevoContacto: Contacto) {
+
+        val Listacontactos = obtenerContactos(context).toMutableList()
+
+
+        Listacontactos.add(nuevoContacto)
+        logContactos(this)
+
+        guardarContactos(context, Listacontactos)
+    }
+    fun logContactos(context: Context) {
+
+        val contactos = obtenerContactos(context)
+
+
+        val gson = Gson()
+        val json = gson.toJson(contactos)
+
+
+        Log.d("ContactosLog", "Lista de contactos: $json")
     }
 }

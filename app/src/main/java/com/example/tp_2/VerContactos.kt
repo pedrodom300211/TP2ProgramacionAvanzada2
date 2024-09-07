@@ -8,14 +8,14 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ImageButton
-import android.widget.Spinner
-import android.widget.TextView
 import android.widget.ListView
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+
 
 class VerContactos : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,6 +66,7 @@ class VerContactos : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("Contactos", Context.MODE_PRIVATE)
 
         // Recuperar los datos que se han guardado
+
         val nombre = sharedPreferences.getString("NOMBRE", "No disponible")
         val apellido = sharedPreferences.getString("APELLIDO", "No disponible")
         val telefono = sharedPreferences.getString("TELEFONO", "No disponible")
@@ -76,10 +77,7 @@ class VerContactos : AppCompatActivity() {
         val intereses = sharedPreferences.getString("INTERESES", "No disponible")
         val radioButtonSeleccionadoId = sharedPreferences.getString("RADIO_BUTTON_SELECCIONADO", "No disponible")
 
-        // Convertir los datos a un formato de texto
 
-        Log.d("RecuperarDatos", "Intereses recuperados: $intereses")
-        Log.d("RecuperarDatos", "RadioButton seleccionado: $radioButtonSeleccionadoId")
 
         val datosTexto = """
             Nombre: $nombre
