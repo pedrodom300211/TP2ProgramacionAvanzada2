@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.RadioButton
@@ -23,8 +24,8 @@ class MasDatosUsuario : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var direccion: String
     private lateinit var fechaNacimiento: String
-    private lateinit var listaIntereses: MutableList<String>
-    private var IDBtonoSeleccionado: Int = -1
+    private lateinit var listaIntereses: String
+
     private var nivelEstudios =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +39,8 @@ class MasDatosUsuario : AppCompatActivity() {
         direccion = intent.getStringExtra("direccion") ?: ""
         fechaNacimiento = intent.getStringExtra("fechaNacimiento") ?: ""
 
-        listaIntereses = mutableListOf()
+
+
 
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -48,60 +50,56 @@ class MasDatosUsuario : AppCompatActivity() {
 
         }
 
-        val radioGroup = findViewById<RadioGroup>(R.id.RadioGroupNivelEstudios)
-        IDBtonoSeleccionado = radioGroup.checkedRadioButtonId
+        val radioGroup: RadioGroup  = findViewById(R.id.RadioGroupNivelEstudios)
+        val idBtonoSeleccionado =radioGroup.checkedRadioButtonId
 
-        val chkBoxDeporte = findViewById<CheckBox>(R.id.Deporte)
-        val chkBoxMusica = findViewById<CheckBox>(R.id.Musica)
-        val chkBoxArte = findViewById<CheckBox>(R.id.Arte)
-        val chkBoxTecnologia = findViewById<CheckBox>(R.id.Tecnologia)
 
-        val listaIntereses=mutableListOf<String>()
+        if (idBtonoSeleccionado != -1) {
+            val selectedRadioButton: RadioButton = findViewById(idBtonoSeleccionado)
 
-        if (chkBoxDeporte.isChecked) {
-            listaIntereses.add(chkBoxDeporte.text.toString())
-        }
-        if (chkBoxMusica.isChecked) {
-            listaIntereses.add(chkBoxMusica.text.toString())
-        }
-        if (chkBoxArte.isChecked) {
-            listaIntereses.add(chkBoxArte.text.toString())
-        }
-        if (chkBoxTecnologia.isChecked) {
-            listaIntereses.add(chkBoxTecnologia.text.toString())
-        }
+            nivelEstudios=selectedRadioButton.text.toString()
 
-        if (IDBtonoSeleccionado != -1) {
-
-            val IDBtonoSeleccionado = findViewById<RadioButton>(IDBtonoSeleccionado)
-            val selectedText = IDBtonoSeleccionado.text.toString()
-            nivelEstudios=selectedText;
 
         } else {
             Toast.makeText(this, "No se seleccionó ninguna opción", Toast.LENGTH_SHORT).show()
+            nivelEstudios="NO ENTRO CORRECTAMENTE"
         }
 
-        val switch = findViewById<Switch>(R.id.switchDeseaRecibirInfo)
-        switch.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                // El Switch está en "On" (Sí)
+        radioGroup.setOnCheckedChangeListener { group, checkedId ->
 
-            } else {
-                // El Switch está en "Off" (No)
+            val selectedRadioButton = findViewById<RadioButton>(checkedId)
+             nivelEstudios = selectedRadioButton.text.toString()
 
-            }
         }
+
+
+
+
+
+
+
+
+
+
 
         val btnSiguiente : Button =findViewById(R.id.BtnGuardarContacto)
         btnSiguiente.setOnClickListener{
-            GuardarContacto()
+            val intent = Intent(this@MasDatosUsuario, MainActivity::class.java)
+
+            guardarContacto()
+            startActivity(intent)
         }
 
 
     }
-    private fun GuardarContacto(){
+    private fun guardarContacto(){
         val sharedPreferences = getSharedPreferences("Contactos", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
+        val chkBoxDeporte = findViewById<CheckBox>(R.id.Deporte)
+        val chkBoxMusica = findViewById<CheckBox>(R.id.Musica)
+        val chkBoxArte = findViewById<CheckBox>(R.id.Arte)
+        val chkBoxTecnologia = findViewById<CheckBox>(R.id.Tecnologia)
+        listaIntereses=""
 
         editor.putString("NOMBRE", nombre)
         editor.putString("APELLIDO", apellido)
@@ -110,6 +108,19 @@ class MasDatosUsuario : AppCompatActivity() {
         editor.putString("DIRECCION", direccion)
         editor.putString("FECHA_NACIMIENTO", fechaNacimiento)
 
+        if (chkBoxDeporte.isChecked) {
+            listaIntereses+= chkBoxDeporte.text.toString()+" "
+        }
+        if (chkBoxMusica.isChecked) {
+            listaIntereses+=chkBoxMusica.text.toString()+" "
+        }
+        if (chkBoxArte.isChecked) {
+            listaIntereses+= chkBoxArte.text.toString()+" "
+        }
+        if (chkBoxTecnologia.isChecked) {
+            listaIntereses+= chkBoxTecnologia.text.toString()+ " "
+        }
+
 
         val switch = findViewById<Switch>(R.id.switchDeseaRecibirInfo)
         editor.putBoolean("DESEA_RECIBIR_INFO", switch.isChecked)
@@ -117,11 +128,13 @@ class MasDatosUsuario : AppCompatActivity() {
 
 
 
-        editor.putString("INTERESES", listaIntereses.toString())
+        editor.putString("INTERESES", listaIntereses)
 
 
 
         editor.putString("RADIO_BUTTON_SELECCIONADO", nivelEstudios)
+        Log.d("GuardarContacto", "Intereses guardados: $listaIntereses")
+        Log.d("GuardarContacto", "RadioButton seleccionado: $nivelEstudios")
         editor.apply()
 
     }

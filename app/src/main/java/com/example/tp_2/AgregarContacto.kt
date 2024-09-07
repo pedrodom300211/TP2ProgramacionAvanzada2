@@ -24,6 +24,9 @@ class AgregarContacto : AppCompatActivity() {
     private lateinit var email: EditText
     private lateinit var direccion: EditText
     private lateinit var fechaNacimiento: EditText
+    private lateinit var spinnerTelefono: Spinner
+    private lateinit var spinnerEmail: Spinner
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +37,8 @@ class AgregarContacto : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+
         val spinnerToolBar:Spinner=findViewById(R.id.spinner_main_activity_1)
         val itemsSpinnerToolBar = resources.getStringArray(R.array.listado_items)
         val adapterSpinnerToolBar = ArrayAdapter(this,android.R.layout.simple_spinner_item,itemsSpinnerToolBar)
@@ -51,7 +56,7 @@ class AgregarContacto : AppCompatActivity() {
                 Toast.makeText(this@AgregarContacto, "$selectedItem", Toast.LENGTH_SHORT).show()
                 when (selectedItem) {
                     "Agregar Contactos" -> {
-                        val intent = Intent(this@AgregarContacto, AgregarContacto::class.java)
+                         val intent = Intent(this@AgregarContacto, AgregarContacto::class.java)
                         startActivity(intent)
                     }
                     "Listado de contactos" -> {
@@ -68,6 +73,62 @@ class AgregarContacto : AppCompatActivity() {
 
             }
         }
+        spinnerTelefono = findViewById(R.id.spinnerTelefono)
+
+        val itemsSpinnerTelefonoEmail = resources.getStringArray(R.array.listado_items_Telefono_Email)
+
+        val adapterSpinnerTelefono = ArrayAdapter(this, android.R.layout.simple_spinner_item, itemsSpinnerTelefonoEmail)
+        adapterSpinnerTelefono.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerTelefono.adapter = adapterSpinnerTelefono
+
+
+
+        var lugarTelefono = ""
+        var lugarEmail = ""
+
+        spinnerTelefono.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selectedValue: String = itemsSpinnerTelefonoEmail[position]
+                lugarTelefono = when (selectedValue) {
+                    "Casa" -> "CASA"
+                    "Trabajo" -> "Trabajo"
+                    "Móvil" -> "Móvil"
+                    else -> ""
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+
+            }
+        }
+
+        spinnerEmail = findViewById(R.id.spinnerEmail)
+
+        val adapterSpinnerEmail = ArrayAdapter(this, android.R.layout.simple_spinner_item, itemsSpinnerTelefonoEmail)
+        adapterSpinnerEmail.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerEmail.adapter = adapterSpinnerEmail
+
+        spinnerEmail.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, id: Long) {
+                val selectedItem = itemsSpinnerTelefonoEmail[position]
+                // Toast.makeText(this@AgregarContacto, "$selectedItem", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+        }
+
+
+
+
+
+
+
+
 
         nombre = findViewById(R.id.editTextNombre)
         apellido = findViewById(R.id.editTextApellido)
@@ -80,16 +141,16 @@ class AgregarContacto : AppCompatActivity() {
         val btnSiguiente :Button=findViewById(R.id.buttonContinuar)
         btnSiguiente.setOnClickListener{
             if(validar()) {
-                val intent = Intent(this, MasDatosUsuario::class.java)
+                val intent2 = Intent(this, MasDatosUsuario::class.java)
                 //envio datos a otro activity
-                intent.putExtra("nombre", nombre.text.toString())
-                intent.putExtra("apellido", apellido.text.toString())
-                intent.putExtra("telefono", telefono.text.toString())
-                intent.putExtra("email", email.text.toString())
-                intent.putExtra("direccion", direccion.text.toString())
-                intent.putExtra("fechaNacimiento", fechaNacimiento.text.toString())
+                intent2.putExtra("nombre", nombre.text.toString())
+                intent2.putExtra("apellido", apellido.text.toString())
+                intent2.putExtra("telefono", telefono.text.toString()+"-"+ lugarTelefono)
+                intent2.putExtra("email", email.text.toString() + lugarEmail)
+                intent2.putExtra("direccion", direccion.text.toString())
+                intent2.putExtra("fechaNacimiento", fechaNacimiento.text.toString())
 
-                startActivity(intent)
+                startActivity(intent2)
 
             }
         }

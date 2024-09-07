@@ -3,6 +3,7 @@ package com.example.tp_2
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -75,6 +76,10 @@ class VerContactos : AppCompatActivity() {
         val radioButtonSeleccionadoId = sharedPreferences.getString("RADIO_BUTTON_SELECCIONADO", "No disponible")
 
         // Convertir los datos a un formato de texto
+
+        Log.d("RecuperarDatos", "Intereses recuperados: $intereses")
+        Log.d("RecuperarDatos", "RadioButton seleccionado: $radioButtonSeleccionadoId")
+
         val datosTexto = """
             Nombre: $nombre
             Apellido: $apellido
@@ -84,7 +89,7 @@ class VerContactos : AppCompatActivity() {
             Fecha de Nacimiento: $fechaNacimiento
             Desea Recibir Información: ${if (deseaRecibirInfo) "Sí" else "No"}
             Intereses: $intereses
-            Radio Button Seleccionado ID: $radioButtonSeleccionadoId
+            Nivel estudios: $radioButtonSeleccionadoId
         """.trimIndent()
 
         // Mostrar los datos en el TextView
