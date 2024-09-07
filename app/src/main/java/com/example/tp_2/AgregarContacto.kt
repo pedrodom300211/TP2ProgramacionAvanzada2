@@ -45,7 +45,7 @@ class AgregarContacto : AppCompatActivity() {
         //Evento click boton siguiente
         val btnSiguiente :Button=findViewById(R.id.buttonContinuar)
         btnSiguiente.setOnClickListener{
-            //if(validar()) {
+            if(validar()) {
                 val intent = Intent(this, MasDatosUsuario::class.java)
                 //envio datos a otro activity
                 intent.putExtra("nombre", nombre.text.toString())
@@ -57,7 +57,7 @@ class AgregarContacto : AppCompatActivity() {
 
                 startActivity(intent)
 
-            //}
+            }
         }
 
         val spinner: Spinner =findViewById(R.id.spinnerTelefono)
@@ -104,10 +104,15 @@ class AgregarContacto : AppCompatActivity() {
             Toast.makeText(this,"Completa los campos",Toast.LENGTH_SHORT).show()
             return false
         }
-        if(!nombre.text.toString().matches(Regex("^[A-Za-z ]+$"))||apellido.text.toString().matches(Regex("^[A-Za-z ]+$"))){
-            Toast.makeText(this,"El nombre y apellido debe contener solo letras",Toast.LENGTH_SHORT).show()
+        if (!nombre.text.toString().matches(Regex("^[A-Za-z ]+$"))) {
+            Toast.makeText(this, "El nombre debe contener solo letras", Toast.LENGTH_SHORT).show()
             return false
         }
+        if (!apellido.text.toString().matches(Regex("^[A-Za-z ]+$"))) {
+            Toast.makeText(this, "El apellido debe contener solo letras", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
         if(!telefono.text.toString().matches(Regex("^[0-9-]+$"))){
             Toast.makeText(this,"El teléfono puede contener solo números y guiones",Toast.LENGTH_SHORT).show()
             return false
