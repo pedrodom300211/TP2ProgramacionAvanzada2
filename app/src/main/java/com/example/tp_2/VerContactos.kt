@@ -15,6 +15,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import java.io.File
+import java.io.IOException
+import com.google.gson.Gson
 
 
 class VerContactos : AppCompatActivity() {
@@ -61,47 +64,49 @@ class VerContactos : AppCompatActivity() {
 
             }
         }
-
-        // Recuperar datos de SharedPreferences
-        val sharedPreferences = getSharedPreferences("Contactos", Context.MODE_PRIVATE)
-
-        // Recuperar los datos que se han guardado
-
-        val nombre = sharedPreferences.getString("NOMBRE", "No disponible")
-        val apellido = sharedPreferences.getString("APELLIDO", "No disponible")
-        val telefono = sharedPreferences.getString("TELEFONO", "No disponible")
-        val email = sharedPreferences.getString("EMAIL", "No disponible")
-        val direccion = sharedPreferences.getString("DIRECCION", "No disponible")
-        val fechaNacimiento = sharedPreferences.getString("FECHA_NACIMIENTO", "No disponible")
-        val deseaRecibirInfo = sharedPreferences.getBoolean("DESEA_RECIBIR_INFO", false)
-        val intereses = sharedPreferences.getString("INTERESES", "No disponible")
-        val radioButtonSeleccionadoId = sharedPreferences.getString("RADIO_BUTTON_SELECCIONADO", "No disponible")
+        val contactos = leerContactosDesdeArchivo(this)
 
 
+        val listView = findViewById<ListView>(R.id.lv1)
 
-        val datosTexto = """
-            Nombre: $nombre
-            Apellido: $apellido
-            Teléfono: $telefono
-            Email: $email
-            Dirección: $direccion
-            Fecha de Nacimiento: $fechaNacimiento
-            Desea Recibir Información: ${if (deseaRecibirInfo) "Sí" else "No"}
-            Intereses: $intereses
-            Nivel estudios: $radioButtonSeleccionadoId
-        """.trimIndent()
 
-        val arrayAdapter:ArrayAdapter<*>
+        val adapter2 = ContactoAdapter(this, contactos)
+        listView.adapter = adapter2
+        listView.setOnItemClickListener { _, _, position, _ ->
+            val contactoSeleccionado = contactos[position]
 
-        val lv1 = findViewById<ListView>(R.id.lv1)
-        val datosEmail = mutableListOf("$nombre $apellido - $email")
 
-        arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, datosEmail)
-        lv1.adapter = arrayAdapter
+            val intent = Intent(this, InfoContacto::class.java)
+            intent.putExtra("CONTACTO", contactoSeleccionado)
 
-        // Mostrar los datos en el TextView
-       // val textViewDatos = findViewById<TextView>(R.id.textViewIntereses)
-       // textViewDatos.text = datosTexto
+
+            startActivity(intent)
+        }
+
+
+
+
+    }
+    private fun leerContactosDesdeArchivo(context: Context): List<Contacto> {
+        val archivo = File(context.filesDir, "contactos.json")
+        val gson = Gson()
+        val contactos = mutableListOf<Contacto>()
+
+        if (archivo.exists()) {
+            try {
+                archivo.forEachLine { linea ->
+                    val contacto = gson.fromJson(linea, Contacto::class.java)
+                    contactos.add(contacto)
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+                println("Error al leer los contactos.")
+            }
+        } else {
+            println("El archivo de contactos no existe.")
+        }
+
+        return contactos
     }
 
 

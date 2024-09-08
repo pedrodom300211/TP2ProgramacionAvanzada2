@@ -28,6 +28,7 @@
     <string name="Arte">Arte</string>
     <string name="Tecnologia">Tecnologia</string>
     <string name="Contactos">Contactos</string>
+    <string name="Regresar">Regresar</string>
 
 
     <string-array name="listado_items">

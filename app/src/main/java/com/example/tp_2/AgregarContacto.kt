@@ -26,6 +26,7 @@ class AgregarContacto : AppCompatActivity() {
     private lateinit var fechaNacimiento: EditText
     private lateinit var spinnerTelefono: Spinner
     private lateinit var spinnerEmail: Spinner
+    val lugarTelefono=""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,13 +88,9 @@ class AgregarContacto : AppCompatActivity() {
         var lugarEmail = ""
 
         spinnerTelefono.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, posicion: Int, ID: Long
             ) {
-                val selectedValue: String = itemsSpinnerTelefonoEmail[position]
+                val selectedValue: String = itemsSpinnerTelefonoEmail[posicion]
                 lugarTelefono = when (selectedValue) {
                     "Casa" -> "CASA"
                     "Trabajo" -> "Trabajo"
@@ -133,7 +130,9 @@ class AgregarContacto : AppCompatActivity() {
         nombre = findViewById(R.id.editTextNombre)
         apellido = findViewById(R.id.editTextApellido)
         telefono = findViewById(R.id.editTextTelefono)
-        email = findViewById(R.id.editTextEmail)
+
+        email= findViewById(R.id.editTextEmail)
+        var email2=email.text.toString() + lugarTelefono
         direccion = findViewById(R.id.editTextDireccion)
         fechaNacimiento = findViewById(R.id.editTextDateFechaNacimiento)
 
@@ -146,7 +145,7 @@ class AgregarContacto : AppCompatActivity() {
                 intent2.putExtra("nombre", nombre.text.toString())
                 intent2.putExtra("apellido", apellido.text.toString())
                 intent2.putExtra("telefono", telefono.text.toString()+"-"+ lugarTelefono)
-                intent2.putExtra("email", email.text.toString() + lugarEmail)
+                intent2.putExtra("email", email2)
                 intent2.putExtra("direccion", direccion.text.toString())
                 intent2.putExtra("fechaNacimiento", fechaNacimiento.text.toString())
 

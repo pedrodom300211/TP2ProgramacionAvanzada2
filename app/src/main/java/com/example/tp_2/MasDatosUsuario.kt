@@ -17,7 +17,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-
+import java.io.File
+import java.io.IOException
 
 
 class MasDatosUsuario : AppCompatActivity() {
@@ -28,6 +29,8 @@ class MasDatosUsuario : AppCompatActivity() {
     private lateinit var direccion: String
     private lateinit var fechaNacimiento: String
     private lateinit var listaIntereses: String
+
+
 
     private var nivelEstudios =""
 
@@ -41,10 +44,6 @@ class MasDatosUsuario : AppCompatActivity() {
         email = intent.getStringExtra("email") ?: ""
         direccion = intent.getStringExtra("direccion") ?: ""
         fechaNacimiento = intent.getStringExtra("fechaNacimiento") ?: ""
-
-
-
-
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -74,17 +73,6 @@ class MasDatosUsuario : AppCompatActivity() {
              nivelEstudios = selectedRadioButton.text.toString()
 
         }
-
-
-
-
-
-
-
-
-
-
-
         val btnSiguiente : Button =findViewById(R.id.BtnGuardarContacto)
         btnSiguiente.setOnClickListener{
             val intent = Intent(this@MasDatosUsuario, MainActivity::class.java)
@@ -96,15 +84,16 @@ class MasDatosUsuario : AppCompatActivity() {
 
     }
     private fun guardarContacto(){
-        //val sharedPreferences = getSharedPreferences("Contactos", Context.MODE_PRIVATE)
-       // val editor = sharedPreferences.edit()
+
+        /*val sharedPreferences = getSharedPreferences("Contactos", Context.MODE_PRIVATE)
+       val editor = sharedPreferences.edit()*/
         val chkBoxDeporte = findViewById<CheckBox>(R.id.Deporte)
         val chkBoxMusica = findViewById<CheckBox>(R.id.Musica)
         val chkBoxArte = findViewById<CheckBox>(R.id.Arte)
         val chkBoxTecnologia = findViewById<CheckBox>(R.id.Tecnologia)
         listaIntereses=""
-
-        /*editor.putString("NOMBRE", nombre)
+/*
+        editor.putString("NOMBRE", nombre)
         editor.putString("APELLIDO", apellido)
         editor.putString("TELEFONO", telefono)
         editor.putString("EMAIL", email)
@@ -124,67 +113,46 @@ class MasDatosUsuario : AppCompatActivity() {
             listaIntereses+= chkBoxTecnologia.text.toString()+ " "
         }
 
+       /* val switch = findViewById<Switch>(R.id.switchDeseaRecibirInfo)
+       editor.putBoolean("DESEA_RECIBIR_INFO", switch.isChecked)
 
+       editor.putString("INTERESES", listaIntereses)
+
+        editor.putString("RADIO_BUTTON_SELECCIONADO", nivelEstudios)
+
+       editor.apply()*/
         val switch = findViewById<Switch>(R.id.switchDeseaRecibirInfo)
-       /* editor.putBoolean("DESEA_RECIBIR_INFO", switch.isChecked)*/
+        val contacto = Contacto(
+            nombre= nombre,
+            apellido= apellido,
+            email=email,
+            telefono=telefono,
+            FechaNaciemiento=fechaNacimiento,
+            Direccion=direccion,
+            NivelEstudios=nivelEstudios,
+            Intereses=listaIntereses,
+            DeseaInformacion=switch.isChecked.toString()
+        )
+        guardarContactoEnArchivo(this,contacto)
 
-
-
-
-       /* editor.putString("INTERESES", listaIntereses)*/
-
-
-
-        /*editor.putString("RADIO_BUTTON_SELECCIONADO", nivelEstudios)*/
-
-
-
-
-
-       /// editor.apply()
-        val nuevoContacto= Contacto(nombre,apellido,email,telefono,fechaNacimiento,direccion,nivelEstudios,listaIntereses,nivelEstudios)
-        agregarContacto(this,nuevoContacto)
 
     }
-    fun guardarContactos(context: Context, contactos: List<Contacto>) {
-        val sharedPreferences = context.getSharedPreferences("Contactos", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
+
+    fun guardarContactoEnArchivo(context: Context, contacto: Contacto) {
+        val archivo = File(context.filesDir, "contactos.json")
         val gson = Gson()
-        val json = gson.toJson(contactos)
-        editor.putString("contactos_key", json)
-        editor.apply()
+
+        try {
+
+            val jsonContacto = gson.toJson(contacto)
+
+
+            archivo.appendText(jsonContacto + "\n")
+            println("Contacto guardado exitosamente.")
+        } catch (e: IOException) {
+            e.printStackTrace()
+            println("Error al guardar el contacto.")
+        }
     }
 
-
-    fun obtenerContactos(context: Context): List<Contacto> {
-        val sharedPreferences = context.getSharedPreferences("Contactos", Context.MODE_PRIVATE)
-        val gson = Gson()
-        val json = sharedPreferences.getString("contactos_key", null)
-        val type = object : TypeToken<List<Contacto>>() {}.type
-        return gson.fromJson(json, type) ?: emptyList()
-    }
-
-
-
-    fun agregarContacto(context: Context, nuevoContacto: Contacto) {
-
-        val Listacontactos = obtenerContactos(context).toMutableList()
-
-
-        Listacontactos.add(nuevoContacto)
-        logContactos(this)
-
-        guardarContactos(context, Listacontactos)
-    }
-    fun logContactos(context: Context) {
-
-        val contactos = obtenerContactos(context)
-
-
-        val gson = Gson()
-        val json = gson.toJson(contactos)
-
-
-        Log.d("ContactosLog", "Lista de contactos: $json")
-    }
 }
